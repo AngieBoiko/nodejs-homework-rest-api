@@ -43,18 +43,22 @@ const addContact = async ({ name, email, phone }) => {
   return newContact;
 };
 
-const updateContact = async (contactId, { name, email, phone }) => {
-  const contactsList = await listContacts();
-  const index = contactsList.findIndex(
-    (item) => Number(item.id) === Number(contactId)
-  );
-  if (index === -1) {
-    return null;
+const updateContact = async (contactId, data) => {
+  try {
+    const contactsList = await listContacts();
+    const index = contactsList.findIndex(
+      (item) => Number(item.id) === Number(contactId)
+    );
+    if (index === -1) {
+      return null;
+    }
+    contactsList[index] = { contactId, ...data };
+    JSON.stringify(contactsList);
+    await fs.writeFile(contactsPath, contactsList);
+    return contactsList[index];
+  } catch (error) {
+    return error.message;
   }
-  contactsList[index] = { name, email, phone, contactId };
-  JSON.stringify(contactsList);
-  await fs.writeFile(contactsPath, contactsList);
-  return contactsList[index];
 };
 
 module.exports = {
