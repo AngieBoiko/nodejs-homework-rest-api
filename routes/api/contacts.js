@@ -49,8 +49,17 @@ router.post("/", async (req, res, next) => {
 });
 
 router.delete("/:contactId", async (req, res, next) => {
-  res.json({ message: "template message" });
-});
+  try{
+    const {contactId}=req.params;
+    const removedContact=await operations.removeContact(contactId);
+    if(!removedContact){
+      throw new NotFound("Not found")
+    }
+    res.status(200).json({status:"success", message:"contact deleted"})
+  }catch(error){
+    next(error)
+  }
+  });
 
 router.put("/:contactId", async (req, res, next) => {
   try {
@@ -67,8 +76,6 @@ router.put("/:contactId", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-
-  res.json({ message: "template message" });
-});
+  });
 
 module.exports = router;
