@@ -1,3 +1,3 @@
-const {contactSchema,Contact}=require('./contact/contact')
+const {contactSchema,Contact,contactJoiSchema}=require('./contact/contact')
 
-module.exports={Contact,contactSchema}
+module.exports={Contact,contactSchema,contactJoiSchema}
