@@ -1,11 +1,9 @@
 const { BadRequest } = require('http-errors')
-const { contactJoiSchema } = require('../../models');
-
 
 const validation = (contactJoiSchema) => {
   const validationMiddleware = async (req, _, next) => {
     try {
-      const { error } = await contactJoiSchema.validate(req.body);
+      const { error } = await contactJoiSchema.validate(req.body)
       if (error) {
         throw new BadRequest('missing required field')
       }
@@ -13,10 +11,8 @@ const validation = (contactJoiSchema) => {
     } catch (error) {
       next(error)
     }
-  
-
   }
-  return validationMiddleware;
+  return validationMiddleware
 }
 
-module.exports = validation;
+module.exports = validation
