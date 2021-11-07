@@ -7,7 +7,7 @@ const getAllContacts=async (req, res, next) => {
      if(!result){
        throw new NotFound()
      }
-     res.json({
+     res.status(200).json({
        status:"success",
        code:200,
        data:{
