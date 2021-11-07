@@ -5,8 +5,7 @@ const removeContact = async (req, res, next) => {
     try {
         const { contactId } = req.params
         const result= await Contact.findByIdAndRemove(contactId)
-        console.log(result)
-        if(!result){
+        if(result===null){
             throw new NotFound()
         }       
         res.status(200).json({ status: 'success', message: 'contact deleted' })
