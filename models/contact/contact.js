@@ -8,7 +8,8 @@ const contactJoiSchema = Joi.object({
     tlds: { allow: ['com', 'net'] },
   }).required(),
   phone: Joi.string().min(6).max(15).required(),
-  favorite: Joi.boolean()
+  favorite: Joi.boolean(),
+  owner:Joi.string()
 })
 
 const contactSchema = Schema({
@@ -26,6 +27,11 @@ const contactSchema = Schema({
     type: Boolean,
     default: false,
   },
+  owner: {
+    type: SchemaTypes.ObjectId,
+    ref: 'user',
+  }
+
 })
 
 const Contact = model('contact', contactSchema)
