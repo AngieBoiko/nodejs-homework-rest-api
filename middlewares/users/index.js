@@ -1,3 +1,4 @@
 const validation=require('./validation');
+const authentication=require('./authentication')
 
-module.exports={validation};
+module.exports={validation,authentication};
