@@ -1,3 +1,4 @@
-const signUp=require('./signUp');
+const signup=require('./signup');
+const login=require('./login')
 
-module.exports={signUp}
+module.exports={signup,login}
