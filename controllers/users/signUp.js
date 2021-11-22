@@ -1,7 +1,7 @@
 const { User } = require('../../models')
 const { Conflict } = require('http-errors')
 
-const signUp = async (req, res, next) => {
+const signup = async (req, res, next) => {
   try {
     const { email, password } = req.body
     const user = await User.findOne({ email })
@@ -22,4 +22,4 @@ const signUp = async (req, res, next) => {
   }
 }
 
-module.exports = signUp
+module.exports = signup
