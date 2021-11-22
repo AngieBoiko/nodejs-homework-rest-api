@@ -6,24 +6,25 @@ const getAllContacts = async (req, res, next) => {
     const{page=1,limit,favorite}=req.query;  
     const {_id}=req.user;
     let pagination=false
+    let result=[];
     if(limit){
       pagination=true
     }
-    if(favorite){
-      const {docs} = await Contact.paginate({owner:_id, favorite},{page:+page,limit:+limit,pagination})
+    if(favorite==="true"){
+      const {docs} = await Contact.paginate({owner:_id, favorite:true},{page:+page,limit:+limit,pagination})
+      result=docs
     }else{
-    await Contact.paginate({owner:_id},{page:+page,limit:+limit,pagination})
-     return docs
+      const {docs} = await Contact.paginate({owner:_id},{page:+page,limit:+limit,pagination})
+      result=docs
     }    
-    if (docs.length===0) {
+    if (result.length===0) {
       throw new NotFound()
     }
     res.status(200).json({
       status: 'success',
       code: 200,
-      data: {
-        docs
-      }
+      data: result
+      
     })
   } catch (error) {
     next(error)
