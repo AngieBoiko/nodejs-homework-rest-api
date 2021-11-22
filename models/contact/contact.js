@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose')
 const Joi = require('Joi')
-const mongoosePaginate = require('mongoose-paginate-v2');
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const contactJoiSchema = Joi.object({
   name: Joi.string().required(),
@@ -10,7 +10,7 @@ const contactJoiSchema = Joi.object({
   }).required(),
   phone: Joi.string().min(6).max(15).required(),
   favorite: Joi.boolean(),
-  owner:Joi.string()
+  owner: Joi.string()
 })
 
 const contactSchema = Schema({
@@ -34,7 +34,7 @@ const contactSchema = Schema({
   }
 
 })
-contactSchema.plugin(mongoosePaginate);
+contactSchema.plugin(mongoosePaginate)
 const Contact = model('contact', contactSchema)
 
 module.exports = { Contact, contactSchema, contactJoiSchema }

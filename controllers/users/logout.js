@@ -1,18 +1,16 @@
-const {User}=require('../../models');
-
+const { User } = require('../../models')
 
 const logout = async (req, res, next) => {
-    try {
-        const {_id}=req.user;
-        await User.findByIdAndUpdate(_id,{token:null});
-        res.status(204).json({
-            status:'success',
-            message:'No content'
-        })
-
-    } catch (error) {
-        next(error)
-    }
+  try {
+    const { _id } = req.user
+    await User.findByIdAndUpdate(_id, { token: null })
+    res.status(204).json({
+      status: 'success',
+      message: 'No content'
+    })
+  } catch (error) {
+    next(error)
+  }
 }
 
-module.exports = logout;
+module.exports = logout
