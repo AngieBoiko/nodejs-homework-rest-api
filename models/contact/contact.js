@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose')
 const Joi = require('Joi')
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const contactJoiSchema = Joi.object({
   name: Joi.string().required(),
@@ -33,7 +34,7 @@ const contactSchema = Schema({
   }
 
 })
-
+contactSchema.plugin(mongoosePaginate);
 const Contact = model('contact', contactSchema)
 
 module.exports = { Contact, contactSchema, contactJoiSchema }
