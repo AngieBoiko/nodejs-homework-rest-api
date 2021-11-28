@@ -1,10 +1,10 @@
 const { User } = require('../../models')
 const { Conflict } = require('http-errors')
-const gravatar=require('gravatar')
-const fs= require('fs/promises')
-const path=require('path')
+const gravatar = require('gravatar')
+const fs = require('fs/promises')
+const path = require('path')
 
-const avatarPublicDir=path.join(__dirname,'../../public/avatars')
+const avatarPublicDir = path.join(__dirname, '../../public/avatars')
 
 const signup = async (req, res, next) => {
   try {
@@ -13,8 +13,8 @@ const signup = async (req, res, next) => {
     if (user) {
       throw new Conflict('Email in use')
     }
-    const avatarURL=gravatar.url(email)
-    const newUser = new User({ email,avatarURL})
+    const avatarURL = gravatar.url(email)
+    const newUser = new User({ email, avatarURL })
     newUser.setPassword(password)
     await newUser.save()
     res.status(201).json({
@@ -23,10 +23,10 @@ const signup = async (req, res, next) => {
         avatarURL,
         subscription: newUser.subscription
       }
-      
+
     })
-    const id=String(newUser._id);
-    const publicUserAvatarDirPath=path.join(avatarPublicDir,id)
+    const id = String(newUser._id)
+    const publicUserAvatarDirPath = path.join(avatarPublicDir, id)
     await fs.mkdir(publicUserAvatarDirPath)
   } catch (error) {
     next(error)

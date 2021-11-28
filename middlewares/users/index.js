@@ -1,5 +1,5 @@
 const validation = require('./validation')
 const authentication = require('./authentication')
-const upload= require('./upload')
+const upload = require('./upload')
 
-module.exports = { validation, authentication,upload }
+module.exports = { validation, authentication, upload }

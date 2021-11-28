@@ -21,10 +21,10 @@ const userSchema = Schema({
     type: String,
     default: null,
   },
-  avatarURL:{
-    type:String,
+  avatarURL: {
+    type: String,
     default: null,
-  } 
+  }
 })
 
 userSchema.methods.setPassword = function(password) {
@@ -43,7 +43,7 @@ const userJoiSchema = Joi.object({
   password: Joi.string().min(8).max(12).required(),
   subscription: Joi.string(),
   token: Joi.string(),
-  avatarURL:Joi.string()
+  avatarURL: Joi.string()
 })
 
 const User = model('user', userSchema)
