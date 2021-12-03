@@ -1,9 +1,9 @@
 const sendGrid = require('@sendgrid/mail')
 require('dotenv').config()
 
-const API_KEY = process.env(SENDGRID_API_KEY)
+const {SENDGRID_API_KEY} = process.env
 
-sendGrid.setApiKey(API_KEY)
+sendGrid.setApiKey(SENDGRID_API_KEY)
 
 const sendMail = async (data) => {
     const email = { ...data, from: 'boikoanzhela@gmail.com' }

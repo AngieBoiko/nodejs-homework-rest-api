@@ -21,13 +21,13 @@ const signup = async (req, res, next) => {
     const newUser = new User({ email, avatarURL,verificationToken })
     newUser.setPassword(password)
     await newUser.save()
-    const email={
-      to:newUser.mail,
+    const mail={
+      to:email,
       subject:"Welcome and enjoy our app!Confirm your registration",
-      html:`<a href="http://localhost:3000/api/users/verify/${verificationToken}">Enter for confirm your email</a>`
+      html:`<a href="http://localhost:3000/api/users/verify/${verificationToken}">Enter to confirm your email</a>`
     
     }
-    await sendMail(email)
+    await sendMail(mail)
     res.status(201).json({
       user: {
         email: newUser.email,
