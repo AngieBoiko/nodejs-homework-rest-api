@@ -9,7 +9,7 @@ const login = async (req, res, next) => {
   try {
     const { email, password } = req.body
     const user = await User.findOne({ email })
-    if (!user || !user.comparePassword(password)) {
+    if (!user ||!user.verify || !user.comparePassword(password)) {
       throw new Unauthorized('Email or password is wrong')
     }
     const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: '4h' })
